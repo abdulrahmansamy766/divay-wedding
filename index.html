@@ -30,7 +30,7 @@
             -webkit-text-size-adjust: 100%;
         }
 
-        /* شاشة الفيديو الافتتاحية (تملأ الشاشة بالكامل) */
+        /* شاشة الفيديو الافتتاحية تملأ الشاشة بالكامل طولاً وعرضاً */
         #intro-overlay {
             position: fixed;
             top: 0;
@@ -44,13 +44,13 @@
             align-items: center;
             cursor: pointer;
             transition: opacity 0.8s ease;
-            padding: 0; /* إلغاء أي مسافات محيطة ليمتد الفيديو بالكامل */
+            padding: 0;
         }
 
         #intro-overlay video {
             width: 100vw;
             height: 100vh;
-            object-fit: cover; /* لملء الشاشة بالكامل بشكل متناسق ومضبوط */
+            object-fit: fill; /* ليأخذ عرض وطول الشاشة بالكامل تماماً */
         }
 
         .click-hint {
