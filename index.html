@@ -30,13 +30,13 @@
             -webkit-text-size-adjust: 100%;
         }
 
-        /* شاشة الفيديو الافتتاحية متناسقة ومناسبة لحجم الشاشة تماماً */
+        /* شاشة الفيديو الافتتاحية متجاوبة 100% مع الموبايل والكمبيوتر */
         #intro-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
-            height: 100vh;
+            height: 100dvh; /* استخدام dvh لتجنب مشاكل أشرطة المتصفح على الموبايل وضبط المقاسات تماماً */
             background-color: #000;
             z-index: 9999;
             display: flex;
@@ -44,14 +44,12 @@
             align-items: center;
             cursor: pointer;
             transition: opacity 0.8s ease;
-            padding: 10px;
+            overflow: hidden;
         }
 
         #intro-overlay video {
             width: 100%;
             height: 100%;
-            max-width: 100%;
-            max-height: 100%;
             object-fit: contain; /* يحافظ على أبعاد الفيديو الأصلية ويجعله مناسباً للشاشة تماماً بدون تشويه أو قص */
         }
 
