@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafael & Kirsten - Wedding Website</title>
+    <style>
+        :root {
+            --bg-light: #fbf9f5;
+            --card-bg: #f4efe6;
+            --text-main: #2b201a; /* لون داكن جداً لزيادة الوضوح */
+            --text-muted: #665c52;
+            --accent-gold: #9e752b; /* ذهبي أغمق وأوضح */
+            --border-color: #e3d9cc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* شاشة الفيديو الافتتاحية */
+        #intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: opacity 0.8s ease;
+        }
+
+        #intro-overlay video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .click-hint {
+            position: absolute;
+            bottom: 30px;
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 20px;
+            border-radius: 4px;
+            border: 1px solid var(--accent-gold);
+            pointer-events: none;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        .page-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: var(--bg-light);
+            box-shadow: 0 0 40px rgba(0,0,0,0.08);
+        }
+
+        /* Hero Section (تم تقليل التعتيم وإبراز الألوان والصورة لتكون واضحة غير باهتة) */
+        .hero {
+            position: relative;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.4)), url('photo1.jpg');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-top-info {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: var(--text-main);
+            font-weight: bold;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 4px 15px;
+            border-radius: 20px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Brush Script MT', cursive, Georgia, serif;
+            font-size: 4rem;
+            color: #1a120b; /* لون أسود دافئ واضح تماماً */
+            font-weight: bold;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(255,255,255,0.8);
+        }
+
+        .hero-content h2 {
+            font-size: 1rem;
+            letter-spacing: 4px;
+            color: #2b201a;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            text-shadow: 0 1px 3px rgba(255,255,255,0.8);
+        }
+
+        .rsvp-box {
+            display: inline-block;
+            border: 2px solid var(--accent-gold);
+            background-color: #fff;
+            padding: 12px 30px;
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .rsvp-box:hover {
+            background-color: var(--accent-gold);
+            color: #fff;
+        }
+
+        .hero-footer-info {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #1a120b;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 8px 15px;
+            border-radius: 4px;
+        }
+
+        /* Content Sections */
+        section {
+            padding: 60px 40px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-light);
+        }
+
+        section h3 {
+            font-size: 0.95rem;
+            letter-spacing: 3px;
+            color: var(--accent-gold);
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        section p {
+            font-size: 1rem;
+            color: var(--text-main);
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        /* Image Gallery Row */
+        .image-row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 40px 20px;
+            background-color: var(--bg-light);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .image-box {
+            width: 30%;
+            height: 220px;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Program & Details */
+        .details-grid {
+            text-align: left;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .detail-item {
+            margin-bottom: 30px;
+        }
+
+        .detail-item h4 {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .detail-item p {
+            margin: 0;
+            text-align: left;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            letter-spacing: 1px;
+            background-color: var(--bg-light);
+        }
+
+        footer a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .hero-content h1 { font-size: 3rem; }
+            section { padding: 40px 20px; }
+            .hero-footer-info { flex-direction: column; gap: 8px; text-align: center; }
+            .image-row { flex-direction: column; align-items: center; }
+            .image-box { width: 80%; height: 250px; margin-bottom: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شاشة الفيديو الافتتاحية -->
+    <div id="intro-overlay">
+        <video id="intro-video" src="wedding.mp4" playsinline></video>
+        <div class="click-hint" id="hint-text">انقر هنا لبدء العرض والصوت</div>
+    </div>
+
+    <!-- ملف الصوت الخلفي -->
+    <audio id="bg-music" src="background-music.mp3" loop></audio>
+
+    <div class="page-container">
+        
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="hero-top-info">RSVP HERE</div>
+            
+            <div class="hero-content">
+                <h1>Rafael & Kirsten</h1>
+                <h2>Are Getting Married</h2>
+                <a href="#registry" class="rsvp-box">Confirm Attendance</a>
+            </div>
+
+            <div class="hero-footer-info">
+                <span>April 27, 2035, 6:00 PM</span>
+                <span>The Sunroom at Rizal Gardens</span>
+            </div>
+        </header>
+
+        <!-- Image Showcase -->
+        <div class="image-row">
+            <div class="image-box">
+                <img src="photo1.jpg" alt="Photo 1">
+            </div>
+            <div class="image-box">
+                <img src="photo2.jpg" alt="Photo 2">
+            </div>
+            <div class="image-box">
+                <img src="photo3.jpg" alt="Photo 3">
+            </div>
+        </div>
+
+        <!-- Story Section -->
+        <section>
+            <h3>Our Love For Gardens (And Each Other)</h3>
+            <p>Write a paragraph that tells your story as a couple. You can include details like how you met, your journey together, and what makes your relationship unique. This is your chance to share your personality and connect with your guests.</p>
+        </section>
+
+        <!-- Program Section -->
+        <section>
+            <h3>Program</h3>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <h4>5:00 PM</h4>
+                    <p>Welcome Photos & Cocktails</p>
+                </div>
+                <div class="detail-item">
+                    <h4>6:00 PM</h4>
+                    <p>Dinner Program</p>
+                </div>
+                <div class="detail-item">
+                    <h4>7:00 PM</h4>
+                    <p>Toasts & Speeches</p>
+                </div>
+                <div class="detail-item">
+                    <h4>8:00 PM</h4>
+                    <p>Official Picture Taking</p>
+                </div>
+                <div class="detail-item">
+                    <h4>9:00 PM</h4>
+                    <p>Open Bar & Dancing</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reception & Details -->
+        <section>
+            <h3>Reception & Details</h3>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <h4>Reception Venue</h4>
+                    <p>Our reception will take place in The Sunroom at Rizal Gardens — an open-air garden space. The celebration will be outdoors, so expect fresh air, soft grass, and lots of golden hour glow.</p>
+                </div>
+                <div class="detail-item">
+                    <h4>Dress Code</h4>
+                    <p>Garden party chic! Flowy, breathable fabrics and comfortable shoes. Pastel colors are preferred but not mandatory!</p>
+                </div>
+                <div class="detail-item">
+                    <h4>Parking & Directions</h4>
+                    <p>Free parking is available on-site, with designated areas for PWDs and senior guests.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registry Section -->
+        <section id="registry">
+            <h3>Registry & Gifts</h3>
+            <p style="margin-bottom: 20px;">Your presence is truly the best gift we could ask for. But if you feel called to give a little something, we’ve put together a small registry at Sining Spaces.</p>
+            <p><a href="mailto:hello@reallygreatsite.com" style="color: var(--accent-gold);">hello@reallygreatsite.com</a></p>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>Contact Us: (123) 456-7890</p>
+            <p style="margin-top: 10px;">@reallygreatsite</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const overlay = document.getElementById('intro-overlay');
+        const video = document.getElementById('intro-video');
+        const music = document.getElementById('bg-music');
+        const hintText = document.getElementById('hint-text');
+
+        let started = false;
+
+        // عند النقر على الشاشة لأول مرة
+        overlay.addEventListener('click', function() {
+            if (!started) {
+                started = true;
+                hintText.style.display = 'none'; // إخفاء جملة التنبيه
+                
+                // تشغيل الفيديو والصوت معاً
+                video.play().catch(e => console.log("Video play error:", e));
+                music.play().catch(e => console.log("Audio play error:", e));
+            }
+        });
+
+        // بمجرد انتهاء الفيديو تماماً، يتم إخفاؤه بسلاسة والانتقال للمحتوى
+        video.addEventListener('ended', function() {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 800);
+        });
+    </script>
+</body>
+</html>
